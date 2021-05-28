@@ -12,7 +12,8 @@ let choice;
 
 while (true) {
   console.log("Here are the different options you can sort by: state, date, specific tags(tags), response size(size), or politicians. Please enter the different options seperated by a space:");
-    let temp = prompt('').trim();
+
+    let temp = prompt('').replace(/  +/g, ' ').trim();
   if (temp != null) {
     choice = temp;
     break;
@@ -33,7 +34,7 @@ let polChoice;
 if (politicians && (date || tags)) {
   while (true) {
     console.log("Sorry, some of the options that you may have selected such as tags and dates are not avalible with the politician option. Would you like to disable it? Please enter yes/no");
-    polChoice = prompt('').trim();
+    polChoice = prompt('').replace(/  +/g, ' ').trim();
     if (polChoice === null) {
       console.log("Sorry, please enter a valid response.");
     } else {
@@ -53,7 +54,7 @@ if(tags){
   
 
 console.log("Would you like to search for specific keywords? Please seperate the words with a space or leave empty:")
-let temp = prompt('').trim();
+let temp = prompt('').replace(/  +/g, ' ').trim();
 if (temp != null) {
   wordArr = temp.split(" ").join(",");
 } else {
@@ -64,7 +65,7 @@ let state;
 let stateSize;
 if (stateFilt) {
   console.log("Please enter the name of the state you want to target.");
-  let stateBig = prompt('').trim();
+  let stateBig = prompt('').replace(/  +/g, ' ').trim();
   let words = stateBig.split(" ");
 
     for (let i = 0; i < words.length; i++) {
@@ -145,7 +146,7 @@ let dateEnter;
 if (date) {
   while (true) {
     console.log("Please enter a date in YYYY MM DD format. Most dates within 2020 and after should be valid.")
-    let temp = prompt('').trim();
+    let temp = prompt('').replace(/  +/g, ' ').trim();
     const test = new Date(Date.parse(temp));
     if (!isNaN(test.getTime())) {
       dateEnter = temp.split(' ').join('-');
@@ -157,11 +158,15 @@ if (date) {
 }
 let numSize;
 if (size) {
+  while(true){
   console.log("How many results do you want? ");
   numSize = parseInt(
-    prompt('').trim(),
+    prompt('').replace(/  +/g, ' ').trim(),
     10
   );
+  if(numSize >= 0 && !isNaN(numSize)) break;
+  else console.log("Sorry, that was not a valid size. Please try again.");
+  }
 }
 let url;
 if (politicians) {
