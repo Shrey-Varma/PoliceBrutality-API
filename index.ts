@@ -7,7 +7,7 @@ const chalk = require('chalk');
 
 start();
 
-async function start(){
+ function start(){
 let choice;
 
 while (true) {
@@ -185,7 +185,7 @@ console.log("Please wait a few seconds for the results to load...");
 //console.log(url);
 
   async function getAPI(){
-  await axios
+   axios
   .get(url)
   .then((response) => {
     let data = response.data.data;
