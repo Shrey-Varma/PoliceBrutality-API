@@ -197,7 +197,7 @@ console.log("Please wait a few seconds for the results to load...");
       if (!politicians) {
         console.log(`${chalk.redBright.bold(`Title`)}: ${cur.title}`);
         console.log(`${chalk.hex('#FFA500').bold(`Date`)}: ${cur.date}`);
-        console.log(`${chalk.hex('#FFFF00').bold(`Location`)} - ${chalk.dim.green(`State`)}: ${cur.state}, ${chalk.dim.green(`City`)}: ${cur.city}`);
+        console.log(`${chalk.hex('#FFFF00').bold(`Location`)} - ${chalk.bold.green(`State`)}: ${cur.state}, ${chalk.bold.green(`City`)}: ${cur.city}`);
         let linksString = '';
         for(let i =0; i<cur.links.length; i++){
           if(i !== cur.links.length - 1){
