@@ -3,11 +3,14 @@ export{};
 const axios = require('axios');
 const prompt = require('prompt-sync')();
 const chalk = require('chalk');
+const moment = require('moment');
 
+// @ts-ignore
+  moment.suppressDeprecationWarnings = true; 
 
 start();
 
- function start(){
+async function start(){
 let choice;
 
 while (true) {
@@ -185,7 +188,7 @@ console.log("Please wait a few seconds for the results to load...");
 //console.log(url);
 
   async function getAPI(){
-   axios
+   await axios
   .get(url)
   .then((response) => {
     let data = response.data.data;
@@ -196,7 +199,7 @@ console.log("Please wait a few seconds for the results to load...");
     for (const cur of data) {
       if (!politicians) {
         console.log(`${chalk.redBright.bold(`Title`)}: ${cur.title}`);
-        console.log(`${chalk.hex('#FFA500').bold(`Date`)}: ${cur.date}`);
+        console.log(`${chalk.hex('#FFA500').bold(`Date`)}: ${formatDate(cur.date)}`);
         console.log(`${chalk.hex('#FFFF00').bold(`Location`)} - ${chalk.bold.green(`State`)}: ${cur.state}, ${chalk.bold.green(`City`)}: ${cur.city}`);
         let linksString = '';
         for(let i =0; i<cur.links.length; i++){
@@ -239,6 +242,13 @@ getAPI()
 })
 .catch(err => console.log("Axios err: ", err));
 };
+
+function formatDate(date){
+  if(moment(date).isValid()){
+    return moment(date.substr(0,8)).format('MMMM Do YYYY');
+  }
+  else return date;
+}
 
 
   
